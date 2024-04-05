@@ -8,20 +8,33 @@ func TestPowerH(t *testing.T) {
 		Power          int
 		ExpectedResult int
 	}
-	testCases := []test{
-		{Base: 0, Power: 1, ExpectedResult: 0},
-		{Base: 0, Power: 2, ExpectedResult: 0},
+
+	var testCases = []test{
 		{Base: 1, Power: 2, ExpectedResult: 1},
-		{Base: 2, Power: 3, ExpectedResult: 8},
-		{Base: 2, Power: 4, ExpectedResult: 16},
-		{Base: 2, Power: 5, ExpectedResult: 32},
-		{Base: 2, Power: 6, ExpectedResult: 64},
+		{Base: 0, Power: 2, ExpectedResult: 0},
+		{Base: 10, Power: 2, ExpectedResult: 100},
+		{Base: 1, Power: 200, ExpectedResult: 1},
+		{Base: 1, Power: 0, ExpectedResult: 1},
+		{Base: 2, Power: 1, ExpectedResult: 2},
+		{Base: 400, Power: 2, ExpectedResult: 160000},
+		{Base: 0, Power: 0, ExpectedResult: 1},
 	}
 
-	for _, cases := range testCases {
-		res := PowerH(cases.Base, cases.Power)
-		if res != cases.ExpectedResult {
-			t.Errorf("expected: %d , result: %d", cases.ExpectedResult, res)
+	for _, c := range testCases {
+		res := PowerH(c.Base, c.Power)
+
+		if res != c.ExpectedResult {
+			t.Errorf("expecte: %d , result: %d", c.ExpectedResult, res)
 		}
+	}
+
+}
+
+var result int
+
+func BenchmarkPowerH(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		res := PowerH(2, 99)
+		result = res
 	}
 }
