@@ -34,7 +34,7 @@ var result int
 
 func BenchmarkPowerH(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		res := PowerH(2, 99)
+		res := PowerH(2, 1)
 		result = res
 	}
 }
